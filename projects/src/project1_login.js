@@ -1,3 +1,5 @@
+// main.js
+
 const users = [
     { id: 1, username: "mendoma", password: "password1", userType: "admin" },
     { id: 2, username: "myohan", password: "password2", userType: "standard" },
@@ -29,7 +31,12 @@ function displayUserData(user) {
     const tableBody = document.getElementById("userTableBody");
     tableBody.innerHTML = "";
 
-    const filteredUsers = user.userType === "admin" ? users : users.filter(u => u.userType === "standard");
+    let filteredUsers;
+    if (user.userType === "admin") {
+        filteredUsers = users;
+    } else {
+        filteredUsers = users.filter(u => u.username === user.username);
+    }
     
     filteredUsers.forEach(u => {
         let row = `<tr><td>${u.id}</td><td>${u.username}</td><td>${u.userType}</td></tr>`;
